@@ -67,4 +67,67 @@ button {
   letter-spacing: 0.04em;
   color: #989898;
   box-sizing: border-box;
+  cursor: not-allowed;
+}
+
+button.active {
+  background-color: #4e75ff;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+button.active:hover {
+  background-color: #6c8cff;
+}
+
+.snackbar {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-snackbar {
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 360px;
+  height: 40px;
+}
+
+fieldset {
+  width: 360px;
+  height: 78px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  stroke-width: 1px;
+  stroke: #808080;
+  margin-bottom: 24px;
+  padding: 24px 40px 8px;
+}
+
+.radioBtn {
+  width: 20px;
+  height: 20px;
+}
+.radio {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2e2f42;
+  gap: 8px;
+  margin-right: 48px;
+  display: inline-flex;
+  box-shadow: none;
+}
+
+.number {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.number input {
+  border: 1px solid #808080;
+  border-radius: 4px;
+  width: 360px;
+  height: 40px;
 }

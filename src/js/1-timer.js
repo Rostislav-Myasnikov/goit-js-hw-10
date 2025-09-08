@@ -4,7 +4,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 let userSelectedDate = null;
-let countdownInterval = null;
+let interval = null;
 
 const refs = {
   startBtn: document.querySelector('[data-start]'),
@@ -32,12 +32,14 @@ flatpickr('#datetime-picker', {
         position: 'topRight',
       });
       refs.startBtn.disabled = true;
+      refs.startBtn.classList.remove('active');
       userSelectedDate = null;
       return;
     }
 
     userSelectedDate = selectedDate;
     refs.startBtn.disabled = false;
+    refs.startBtn.classList.add('active');
   },
 });
 
@@ -45,14 +47,14 @@ refs.startBtn.addEventListener('click', () => {
   if (!userSelectedDate) return;
 
   refs.startBtn.disabled = true;
-  clearInterval(countdownInterval);
+  clearInterval(interval);
 
-  countdownInterval = setInterval(() => {
+  interval = setInterval(() => {
     const now = new Date();
     const diff = userSelectedDate - now;
 
     if (diff <= 0) {
-      clearInterval(countdownInterval);
+      clearInterval(interval);
       updateTimer(0);
       return;
     }
@@ -78,8 +80,8 @@ function convertMs(ms) {
 
   const days = Math.floor(ms / day);
   const hours = Math.floor((ms % day) / hour);
-  const minutes = Math.floor((ms % hour) / minute);
-  const seconds = Math.floor((ms % minute) / second);
+  const minutes = Math.floor(((ms % day) % hour) / minute);
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
 }
