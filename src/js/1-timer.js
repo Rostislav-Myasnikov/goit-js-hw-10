@@ -8,6 +8,7 @@ let interval = null;
 
 const refs = {
   startBtn: document.querySelector('[data-start]'),
+  dateInput: document.querySelector('#datetime-picker'),
   daysEl: document.querySelector('[data-days]'),
   hoursEl: document.querySelector('[data-hours]'),
   minutesEl: document.querySelector('[data-minutes]'),
@@ -16,7 +17,7 @@ const refs = {
 
 refs.startBtn.disabled = true;
 
-flatpickr('#datetime-picker', {
+flatpickr(refs.dateInput, {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
@@ -47,6 +48,8 @@ refs.startBtn.addEventListener('click', () => {
   if (!userSelectedDate) return;
 
   refs.startBtn.disabled = true;
+  refs.dateInput.disabled = true;
+
   clearInterval(interval);
 
   interval = setInterval(() => {
@@ -56,6 +59,10 @@ refs.startBtn.addEventListener('click', () => {
     if (diff <= 0) {
       clearInterval(interval);
       updateTimer(0);
+
+      refs.dateInput.disabled = false;
+      refs.startBtn.disabled = true;
+      refs.startBtn.classList.remove('active');
       return;
     }
 
